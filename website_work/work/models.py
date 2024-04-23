@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 
 class Post(models.Model):
@@ -32,3 +34,17 @@ class ReplyPost(models.Model):
 
     def __str__(self):
         return f'Отклик {self.user.username} на - {self.post.name}'
+
+
+class BaseRegisterForm(UserCreationForm):
+    """Форма регистрации пользователя"""
+
+    email = forms.EmailField(lable='Email')
+
+    class Meta:
+        model = User
+        fields = ('username',
+                  'email',
+                  'password1',
+                  'password2',
+                  )
