@@ -1,7 +1,23 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView
-from .models import BaseRegisterForm
+from .models import Post, BaseRegisterForm
+from django.views.generic import TemplateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+# class CustomerView(ListView):
+#     ...
+
+
+class ExecutorView(ListView):
+    ordering = '-date'
+    template_name = 'executor.html'
+    context_object_name = 'executor'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Post.objects.filter(category='or') #.excloude(user=self.request.user)
+
 
 
 class BaseRegisterView(CreateView):

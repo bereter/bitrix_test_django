@@ -39,7 +39,7 @@ class ReplyPost(models.Model):
 class BaseRegisterForm(UserCreationForm):
     """Форма регистрации пользователя"""
 
-    email = forms.EmailField(lable='Email')
+    email = forms.EmailField(label='Email')
 
     class Meta:
         model = User
