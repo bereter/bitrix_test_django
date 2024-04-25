@@ -16,7 +16,7 @@ class ExecutorView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Post.objects.filter(category='or') #.excloude(user=self.request.user)
+        return Post.objects.filter(category='or') .exclude(user=self.request.user)
 
 
 
