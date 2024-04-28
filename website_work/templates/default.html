@@ -26,13 +26,16 @@
                 <li class="nav-item active">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Заказчик</a>
+                    <a class="nav-link" href="{% url 'executor_list' %}">Исполнитель</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="executor/">Исполнитель</a>
+                    <a class="nav-link" href="{% url 'customer_list' %}">Мои заказы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout">Выйти из аккаунта</a>
+                    <a class="nav-link" href="{% url 'customer_create' %}">Создать заказ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Выйти из аккаунта</a>
                 </li>
             </ul>
         </div>
