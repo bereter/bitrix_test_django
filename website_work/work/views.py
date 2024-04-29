@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView
-from .models import Post, BaseRegisterForm
+from .models import Post, ReplyPost
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import PostForm
+from .forms import PostForm, ReplyForm
 from django.urls import reverse_lazy
 
 
@@ -45,18 +45,20 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class CustomerDeleteView(LoginRequiredMixin, DeleteView):
+    """Удалить заказ"""
     model = Post
     template_name = 'customer_delete.html'
     success_url = reverse_lazy('customer_list')
 
-class CustomerDetail(LoginRequiredMixin, DetailView):
+
+class CustomerDetailView(LoginRequiredMixin, DetailView):
+    """Просмотр откликов"""
     model = Post
-    template_name = 'product.html'
+    template_name = 'customer_reply.html'
     context_object_name = 'post'
 
 
-
-class ExecutorView(LoginRequiredMixin, ListView):
+class ExecutorView(ListView):
     """Исполнитель"""
 
     ordering = '-date'
@@ -73,10 +75,16 @@ class ExecutorView(LoginRequiredMixin, ListView):
         return context
 
 
-class BaseRegisterView(CreateView):
-    model = User
-    form_class = BaseRegisterForm
-    success_url = '/'
+class ReplyCreateView(LoginRequiredMixin, DetailView):
+    """Создвние отклика"""
+    form_class = ReplyForm
+    model = ReplyPost
+    template_name = 'reply_create.html'
 
+    def form_valid(self, form):
+        reply = form.save(commit=False)
+        # reply.user = self.request.user
+        # reply.category = 'or'
+        return super().form_valid(form)
 
 

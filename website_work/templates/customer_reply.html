@@ -1,0 +1,18 @@
+{% extends 'default.html' %}
+
+{% block content %}
+<h1>{{ post.name }}</h1>
+<h1>{{ post.user.username }}</h1>
+<h1>{{ post.description }}</h1>
+<h1>Стоимость: {{ post.price }}</h1>
+
+
+<hr>
+
+{% if post.reply %}
+    {% for rep in post.reply.all %}
+        <h2>От {{ rep.user.username }}: {{ rep.description }}</h2>
+
+    {% endfor %}
+{% endif %}
+{% endblock content %}
