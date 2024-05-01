@@ -8,4 +8,5 @@ urlpatterns = [
     path('customer/create/', CustomerCreateView.as_view(), name='customer_create'),
     path('customer/edit/<int:pk>/', CustomerUpdateView.as_view(), name='customer_update'),
     path('customer/delete/<int:pk>/', CustomerDeleteView.as_view(), name='customer_delete'),
+    path('reply/<int:pk_post>/', ReplyCreateView.as_view(), name='reply_create'),
 ]

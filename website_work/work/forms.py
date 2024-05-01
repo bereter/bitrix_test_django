@@ -11,6 +11,7 @@ class PostForm(forms.ModelForm):
             'price'
         ]
 
+
 class ReplyForm(forms.ModelForm):
 
     class Meta:

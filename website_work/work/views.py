@@ -75,16 +75,16 @@ class ExecutorView(ListView):
         return context
 
 
-class ReplyCreateView(LoginRequiredMixin, DetailView):
-    """Создвние отклика"""
+class ReplyCreateView(LoginRequiredMixin, CreateView):
+    """Создание отклика"""
     form_class = ReplyForm
     model = ReplyPost
     template_name = 'reply_create.html'
 
     def form_valid(self, form):
         reply = form.save(commit=False)
-        # reply.user = self.request.user
-        # reply.category = 'or'
+        reply.user = self.request.user
+        reply.post = Post.objects.get(pk=self.kwargs['pk_post'])
         return super().form_valid(form)
 
 
